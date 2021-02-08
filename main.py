@@ -3,29 +3,15 @@ import sys
 
 import pygame
 import requests
-
-
 API_KEY = '40d1649f-0493-4b70-98ba-98533de7710b'
 
-toponym_to_find = " ".join(sys.argv[1:])
-
-geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
-
-geocoder_params = {
-    "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
-    "geocode": toponym_to_find,
-    "format": "sat"}
-
-response = requests.get(geocoder_api_server, params=geocoder_params).json()
-toponym = response["response"]["GeoObjectCollection"][
-    "featureMember"][0]["GeoObject"]
-toponym_coodrinates = toponym["Point"]["pos"]  # центр объекта
-toponym_longitude, toponym_lattitude = toponym_coodrinates.split(" ")
-
+toponym_to_find = ','.join(input('Введите координаты в виде (координатаХ,координатаУ): ').split(',')[::-1])
+spn = input('Введите масштаб в виде (значение,значение): ')
 
 map_params = {
-    'll': ','.join([toponym_longitude, toponym_lattitude]),
-    "l": "map"
+    'll': toponym_to_find,
+    "l": "map",
+    'spn': spn
 }
 
 map_api_server = "http://static-maps.yandex.ru/1.x/"
