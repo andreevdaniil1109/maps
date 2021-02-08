@@ -26,7 +26,7 @@ def change_spn(sender):
 
 
 toponym_to_find = ','.join(input('Введите координаты в виде (координатаХ,координатаУ): ').split(',')[::-1])
-spn = input('Введите масштаб: ')
+spn = input('Введите масштаб (целое число): ')
 
 map_params = {
     'll': toponym_to_find,
